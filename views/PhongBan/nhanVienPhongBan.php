@@ -21,4 +21,4 @@
     </table>
 </div>
     
-<a class="btn btn-outline-primary" href="./">Back</a>
+<a class="btn btn-outline-primary" href="../">Back</a>

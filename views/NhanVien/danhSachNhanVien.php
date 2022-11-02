@@ -27,11 +27,11 @@
                     echo "<td>$value</td>";
                 }
 
-                echo "<td><form action='' method='post'>
-                <input type='hidden' name='idnv' value={$arr['idnv']}>
-                <input class='btn btn-success' type='submit' value='Edit' name='chinh_sua_nhan_vien'>
-                <input class='btn btn-danger' type='submit' value='Delete' name='xoa_nhan_vien'>
-                </form></td>";
+                echo "<td>
+                <button class='btn btn-success' onclick=\"navigate('NhanVien', 'Edit', {$arr['idnv']})\">Edit</button>
+                <button class='btn btn-danger' onclick=\"navigate('NhanVien', 'Delete', {$arr['idnv']})\">Delete</button>
+                </td>";
+
                 echo "</tr>";
             }
             ?>

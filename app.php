@@ -1,4 +1,41 @@
 <?php
+$url = $_SERVER['PATH_INFO'];
+if (empty($url)) {
+    $url='/';
+} 
+
+$arr = explode('/', $url);
+$urlArr = array_filter($arr);
+$urlArr = array_values($urlArr);
+
+if ($urlArr[0]) {
+    $controller = $urlArr[0]."Controller";
+} else {
+    $controller = "NhanVienController";
+}
+
+if ($controller === "AuthController") {
+    $layout = " ";
+}
+
+if ($urlArr[1]) {
+    $action = $urlArr[1];
+} else {
+    $action = "Index";
+}
+
+if ($urlArr[2]) {
+    $arg = $urlArr[2];
+} else {
+    $arg = [];
+}
+
+require_once "controllers/{$controller}.php";
+$controller = new $controller();
+$h = call_user_func([$controller, $action], $arg);
+
+$data = $h['data'];
+$view = $h['view'];
 
 function controller($controllerName) {
     require_once "controllers/{$controllerName}.php";
@@ -7,13 +44,7 @@ function controller($controllerName) {
 }
 
 // Dang Nhap
-if (isset($_POST['dang_nhap'])) {
-    $AuthController = controller('AuthController');
-    $AuthController->Login();
-    $layout = " ";
-}
-
-else if (isset($_POST['login'])) {
+if (isset($_POST['login'])) {
     $AuthController = controller('AuthController');
     $args = array();
     $args['username'] = $_POST['username'];
@@ -23,27 +54,13 @@ else if (isset($_POST['login'])) {
 }
 
 // Dang Xuat
-else if (isset($_POST['dang_xuat'])) {
+if (isset($_POST['logout'])) {
     $AuthController = controller('AuthController');
     $AuthController->Logout();
 }
 
-// Xem Phong Ban
-else if (isset($_POST['danh_sach_phong_ban'])) {
-    $PhongBanController = controller('PhongBanController');
-    $returned = $PhongBanController->Index();
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-
 // Them Phong Ban
-else if (isset($_POST['them_phong_ban'])) {
-    $PhongBanController = controller('PhongBanController');
-    $returned = $PhongBanController->Create();
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-else if (isset($_POST['create_pb'])) {
+if (isset($_POST['create_pb'])) {
     $PhongBanController = controller('PhongBanController');
     $args = array();
     $args['tenpb'] = $_POST['tenpb'];
@@ -52,14 +69,7 @@ else if (isset($_POST['create_pb'])) {
 }
 
 // Chinh Sua Phong Ban
-else if (isset($_POST['chinh_sua_phong_ban'])) {
-    $PhongBanController = controller('PhongBanController');
-    $arg = $_POST['idpb'];
-    $returned = $PhongBanController->Edit($arg);
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-else if (isset($_POST['edit_pb'])) {
+if (isset($_POST['edit_pb'])) {
     $PhongBanController = controller('PhongBanController');
     $args = array();
     $args['idpb'] = $_POST['idpb'];
@@ -69,21 +79,14 @@ else if (isset($_POST['edit_pb'])) {
 }
 
 // Xoa Phong Ban
-else if (isset($_POST['xoa_phong_ban'])) {
-    $PhongBanController = controller('PhongBanController');
-    $arg = $_POST['idpb'];
-    $returned = $PhongBanController->Delete($arg);
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-else if (isset($_POST['delete_pb'])) {
+if (isset($_POST['delete_pb'])) {
     $PhongBanController = controller('PhongBanController');
     $idpb = $_POST['idpb'];
     $PhongBanController->HandelDelete($idpb);
 }
 
 // Tim Kiem Phong Ban
-else if (isset($_POST['search_pb'])) {
+if (isset($_POST['search_pb'])) {
     $PhongBanController = controller('PhongBanController');
     $args = array();
     $args['information'] = $_POST['information'];
@@ -93,24 +96,8 @@ else if (isset($_POST['search_pb'])) {
     $view = $returned['view'];
 }
 
-// Xem Nhan Vien Co Trong Phong Ban
-else if (isset($_POST['nhan_vien_phong_ban'])) {
-    $PhongBanController = controller('PhongBanController');
-    $arg = $_POST['idpb'];
-    $returned = $PhongBanController->Detail($arg);
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-
 // Them Nhan Vien
-else if (isset($_POST['them_nhan_vien'])) {
-    $NhanVienController = controller("NhanVienController");
-    $returned = $NhanVienController->Create();
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-
-else if (isset($_POST['create'])) {
+if (isset($_POST['create'])) {
     $NhanVienController = controller("NhanVienController");
     $args = array();
     $args['tennv'] = $_POST['tennv'];
@@ -121,7 +108,7 @@ else if (isset($_POST['create'])) {
 }
 
 // Tim Kiem Nhan Vien
-else if (isset($_POST['search_nv'])) {
+if (isset($_POST['search_nv'])) {
     $NhanVienController = controller("NhanVienController");
     $args = array();
     $args['information'] = $_POST['information'];
@@ -132,15 +119,7 @@ else if (isset($_POST['search_nv'])) {
 }
 
 // Chinh Sua Nhan Vien
-else if (isset($_POST['chinh_sua_nhan_vien'])) {
-    $NhanVienController = controller("NhanVienController");
-    $arg = $_POST['idnv'];
-    $returned = $NhanVienController->Edit($arg);
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-
-else if (isset($_POST['edit'])) {
+if (isset($_POST['edit'])) {
     $NhanVienController = controller("NhanVienController");
     $args = array();
     $args['idnv'] = $_POST['idnv'];
@@ -150,39 +129,16 @@ else if (isset($_POST['edit'])) {
     $NhanVienController->HandelEdit($args);
 }
 // Xoa Nhan Vien
-else if (isset($_POST['xoa_nhan_vien'])) {
-    $NhanVienController = controller("NhanVienController");
-    $arg = $_POST['idnv'];
-    $returned = $NhanVienController->Delete($arg);
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-
-else if (isset($_POST['delete'])) {
+if (isset($_POST['delete'])) {
     $NhanVienController = controller("NhanVienController");
     $idnv = $_POST['idnv'];
     $NhanVienController->HandelDelete($idnv);
 }
 
-// Chon Nhieu Nhan Vien
-else if (isset($_POST['chon_nhieu'])) {
-    $NhanVienController = controller("NhanVienController");
-    $returned = $NhanVienController->Choices();
-    $data = $returned['data'];
-    $view = $returned['view'];
-}
-
-else if (isset($_POST['delete_all'])) {
+// Xoa Nhieu Nhan Vien
+if (isset($_POST['delete_all'])) {
     $NhanVienController = controller("NhanVienController");
     $args = $_POST['st'];
     $NhanVienController->HandelDeleteAll($args);
-}
-
-// Danh Sach Nhan Vien
-else {
-    $NhanVienController = controller("NhanVienController");
-    $returned = $NhanVienController->Index();
-    $data = $returned['data'];
-    $view = $returned['view'];
 }
 ?>

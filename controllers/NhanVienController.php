@@ -4,7 +4,7 @@ class NhanVienController extends Controller {
     function __construct() {
     }
     
-    function Index($args = []){
+    public function Index($args = []){
         $model = $this->model('NhanVienModel');
         $data = $model->getList($args);
         $view = $this->render('NhanVien', 'danhSachNhanVien');
@@ -76,7 +76,7 @@ class NhanVienController extends Controller {
         $model = $this->model('NhanVienModel');
         $result = $model->deleteAll($args);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV");
+
         } else {
             echo "ERROR";
         }

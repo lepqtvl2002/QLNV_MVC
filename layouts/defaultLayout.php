@@ -25,5 +25,14 @@
             </div>        
         </div>
     </div>
+    <script>
+        function navigate(model, action, arg){
+            let url = "/chuong_php/QLNV/index";
+            if (model) url += `/${model}`;
+            if (action) url += `/${action}`;
+            if (arg) url += `/${arg}`;
+            location.href = url;
+        }
+    </script>
 </body>
 </html>

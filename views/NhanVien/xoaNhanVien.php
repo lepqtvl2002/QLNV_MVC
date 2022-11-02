@@ -27,7 +27,7 @@ if ($_SESSION["adminId"] == "") header("Location: http://localhost/chuong_php/QL
         <hr/>
         
         <input class="btn btn-danger" type="submit" value="Delete" name="delete">
-        <a class="btn btn-outline-primary" href="./">Back</a>
+        <a class="btn btn-outline-primary" href="../">Back</a>
 
     </form>
 </div>

@@ -20,7 +20,7 @@ if ($_SESSION["adminId"] == "") header("Location: http://localhost/chuong_php/QL
         <hr/>
         
         <input class="btn btn-success" type="submit" value="Update" name="edit_pb">
-        <a class="btn btn-outline-primary" href="./">Back</a>
+        <a class="btn btn-outline-primary" href="../">Back</a>
 
     </form>
 </div>

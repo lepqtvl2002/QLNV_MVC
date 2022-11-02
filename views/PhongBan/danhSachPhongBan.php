@@ -19,12 +19,13 @@
                 foreach ($arr as $key => $value) {
                     echo "<td>$value</td>";
                 }
-                echo "<td><form action='' method='post'>"
-                ."<input type='hidden' name='idpb' value={$arr['idpb']}>"
-                ."<input class='btn btn-primary' type='submit' value='DSNV' name='nhan_vien_phong_ban'>"
-                ."<input class='btn btn-success' type='submit' value='Edit' name='chinh_sua_phong_ban'>"
-                ."<input class='btn btn-danger' type='submit' value='Delete' name='xoa_phong_ban'>"
-                ."</form></td>";
+                
+                echo "<td>
+                <button class='btn btn-warning' onclick=\"navigate('PhongBan', 'Detail', {$arr['idpb']})\">Detail</button>
+                <button class='btn btn-success' onclick=\"navigate('PhongBan', 'Edit', {$arr['idpb']})\">Edit</button>
+                <button class='btn btn-danger' onclick=\"navigate('PhongBan', 'Delete', {$arr['idpb']})\">Delete</button>
+                </td>";
+
                 echo "</tr>";
             }
             ?>

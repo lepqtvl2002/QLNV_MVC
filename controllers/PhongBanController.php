@@ -27,7 +27,7 @@ class PhongBanController extends Controller {
         $model = $this->model('PhongBanModel');
         $result = $model->create($args);
         if ($result) {
-            header("Location: http://localhost/chuong_php/QLNV");
+            header("Location: http://localhost/chuong_php/QLNV/index/PhongBan");
         } else {
             echo "ERROR";
         }
@@ -44,7 +44,7 @@ class PhongBanController extends Controller {
         $model = $this->model('PhongBanModel');
         $result = $model->edit($args);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV");
+            header("Location: http://localhost/chuong_php/QLNV/index/PhongBan");
         } else {
             echo "ERROR";
         }
@@ -61,7 +61,7 @@ class PhongBanController extends Controller {
         $model = $this->model('PhongBanModel');
         $result = $model->delete($idpb);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV");
+            header("Location: http://localhost/chuong_php/QLNV/index/PhongBan");
         } else {
             echo "ERROR";
         }
