@@ -27,7 +27,7 @@
                     echo "<td>$value</td>";
                 }
 
-                echo "<td>
+                if ($_SESSION['adminId']) echo "<td>
                 <button class='btn btn-success' onclick=\"navigate('NhanVien', 'Edit', {$arr['idnv']})\">Edit</button>
                 <button class='btn btn-danger' onclick=\"navigate('NhanVien', 'Delete', {$arr['idnv']})\">Delete</button>
                 </td>";

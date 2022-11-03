@@ -22,7 +22,7 @@ class NhanVienController extends Controller {
         $model = $this->model('NhanVienModel');
         $result = $model->create($args);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV");
+            header("Location:".__INDEX_LOCATION__);
         } else {
             echo "ERROR";
         }
@@ -42,7 +42,7 @@ class NhanVienController extends Controller {
         $model = $this->model('NhanVienModel');
         $result = $model->edit($args);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV");
+            header("Location:".__INDEX_LOCATION__);
         } else {
             echo "ERROR";
         }
@@ -59,7 +59,7 @@ class NhanVienController extends Controller {
         $model = $this->model('NhanVienModel');
         $result = $model->delete($idnv);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV");
+            header("Location:".__INDEX_LOCATION__);
         } else {
             echo "ERROR";
         }

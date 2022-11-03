@@ -13,8 +13,10 @@ class PhongBanController extends Controller {
 
     function Detail($idpb = 1) {
         $model = $this->model('PhongBanModel');
-        $data = $model->getNhanVien($idpb);
-        $view = $this->render('PhongBan', 'nhanVienPhongBan');
+        $data = $model->getDetail($idpb);
+        $nhanviens = $model->getNhanVien($idpb);
+        $data['nhanviens'] = $nhanviens;
+        $view = $this->render('PhongBan', 'chiTietPhongBan');
         return ['view'=>$view,'data'=>$data];
     }
 
@@ -27,7 +29,7 @@ class PhongBanController extends Controller {
         $model = $this->model('PhongBanModel');
         $result = $model->create($args);
         if ($result) {
-            header("Location: http://localhost/chuong_php/QLNV/index/PhongBan");
+            header("Location:".__INDEX_LOCATION__."/PhongBan");
         } else {
             echo "ERROR";
         }
@@ -44,7 +46,7 @@ class PhongBanController extends Controller {
         $model = $this->model('PhongBanModel');
         $result = $model->edit($args);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV/index/PhongBan");
+            header("Location:".__INDEX_LOCATION__."/PhongBan");
         } else {
             echo "ERROR";
         }
@@ -61,7 +63,7 @@ class PhongBanController extends Controller {
         $model = $this->model('PhongBanModel');
         $result = $model->delete($idpb);
         if($result){
-            header("Location: http://localhost/chuong_php/QLNV/index/PhongBan");
+            header("Location:".__INDEX_LOCATION__."/PhongBan");
         } else {
             echo "ERROR";
         }

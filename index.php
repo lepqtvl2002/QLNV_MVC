@@ -1,6 +1,7 @@
 <?php
 session_start();
-    $layout = 'layouts/defaultLayout.php';
+    require_once 'config.php';
+    $layout = $defaultLayout;
     $title = 'QLNV';
     require_once 'app.php';
     require_once $layout;

@@ -1,5 +1,5 @@
 <?php 
-if ($_SESSION["adminId"] == "") header("Location: http://localhost/chuong_php/QLNV/views/Auth/login");
+if ($_SESSION["adminId"] == "") header("Location:".__LOGIN_LOCATION__);
 
     $idnv = $data['idnv'];
     $tennv = $data['tennv'];    

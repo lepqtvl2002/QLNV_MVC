@@ -3,15 +3,17 @@
         <thead style="text-align:left;">
             <tr>
                 <th>Id</th>
-                <th>Ho Ten</th>
-                <th>Dia chi</th>
+                <th>Họ tên</th>
+                <th>Địa chỉ</th>
             </tr>
         </thead>
         <tbody>
             <?php 
-            foreach ($data as $index => $arr) {
+            echo "<h2>{$data['tenpb']}</h2>",
+            "<h5>{$data['mota']}</h5>";
+            foreach ($data['nhanviens'] as $index => $nhanvien) {
                 echo "<tr>";
-                foreach ($arr as $key => $value) {
+                foreach ($nhanvien as $key => $value) {
                     echo "<td>{$value}</td>";
                 }
                 echo "</tr>";

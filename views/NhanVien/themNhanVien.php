@@ -1,8 +1,8 @@
 <?php
-if ($_SESSION["adminId"] == "") header("Location: http://localhost/chuong_php/QLNV/views/Auth/login");
+if ($_SESSION["adminId"] == "") header("Location:".__LOGIN_LOCATION__);
 ?>
 <form action="" method="post" class="container">
-    <h2>Create</h2>
+    <h2>Thêm nhân viên</h2>
     <label>Họ tên</label>
     <input type="text" name="tennv" required/>
     <br/>

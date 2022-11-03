@@ -16,7 +16,7 @@ class AuthController extends Controller {
         foreach ($data as $key => $row) {
             if ($row['username'] == $username and $row['password'] == $password) {
                 $_SESSION['adminId'] = $row['id'];
-                header("Location: http://localhost/chuong_php/QLNV");
+                header("Location:".__INDEX_LOCATION__);
             }            
         }
         if ($_SESSION["adminId"] == "") require_once 'views/Auth/login.html';
@@ -24,6 +24,6 @@ class AuthController extends Controller {
 
     public function Logout() {
         $_SESSION['adminId'] = "";
-        header("Location: http://localhost/chuong_php/QLNV/");
+        header("Location:".__INDEX_LOCATION__);
     }
 }

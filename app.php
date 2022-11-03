@@ -15,7 +15,7 @@ if ($urlArr[0]) {
 }
 
 if ($controller === "AuthController") {
-    $layout = " ";
+    $layout = $noLayout;
 }
 
 if ($urlArr[1]) {
@@ -50,7 +50,7 @@ if (isset($_POST['login'])) {
     $args['username'] = $_POST['username'];
     $args['password'] = $_POST['password'];
     $AuthController->HandelLogin($args);
-    $layout = " ";
+    $layout = $noLayout;
 }
 
 // Dang Xuat
