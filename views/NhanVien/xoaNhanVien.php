@@ -10,7 +10,6 @@ if ($_SESSION["adminId"] == "") header("Location:".__LOGIN_LOCATION__);
     <form action="" method="POST">
         <h2>DELETE</h2>
         <h4>Ban co chac chan muon xoa ban ghi nay?</h4>
-        <input type="text" name="idnv" value=<?php echo $idnv; ?> readonly hidden/>
         
         <b>Họ và tên : </b>
         <span><?php echo $tennv; ?></span>

@@ -9,7 +9,6 @@ if ($_SESSION["adminId"] == "") header("Location:".__LOGIN_LOCATION__);
     <form action="" method="POST">
         <h2>DELETE</h2>
         <h4>Ban co chac chan muon xoa ban ghi nay?</h4>
-        <input type="text" name="idpb" value=<?php echo $idpb; ?> readonly hidden/>
         
         <b>Thêm phòng ban : </b>
         <span><?php echo $tenpb; ?></span>

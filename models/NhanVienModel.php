@@ -71,7 +71,12 @@ class NhanVienModel {
 
         $sql = "INSERT INTO $dbname.nhanvien VALUES (NULL ,'$tennv', '$idpb', '$diachi')";
 
-        $result = $conn->query($sql);
+        $result = false;
+        try {
+            $result = $conn->query($sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
         
         // Close connect      
         $conn->close();
@@ -89,7 +94,12 @@ class NhanVienModel {
 
         $sql = "UPDATE $dbname.nhanvien SET tennv='$tennv', idpb='$idpb', diachi='$diachi' WHERE idnv=$idnv";
 
-        $result = $conn->query($sql);
+        $result = false;
+        try {
+            $result = $conn->query($sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
         
         // Close connect      
         $conn->close();
@@ -101,7 +111,12 @@ class NhanVienModel {
 
         $sql = "DELETE FROM $dbname.nhanvien WHERE idnv='$idnv'";
 
-        $result = $conn->query($sql);
+        $result = false;
+        try {
+            $result = $conn->query($sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
         
         // Close connect      
         $conn->close();

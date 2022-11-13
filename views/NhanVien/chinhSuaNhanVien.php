@@ -9,7 +9,6 @@ if ($_SESSION["adminId"] == "") header("Location:".__LOGIN_LOCATION__);
 <div class="container">
     <form action="" method="POST">
         <h2>EDITING</h2>
-        <input type="text" name="idnv" id="idnv" value=<?php echo $idnv; ?> readonly hidden/>
         <label>Họ và tên</label>
         <input type="text" value="<?php echo $tennv; ?>" name="tennv"/>
         <br/>

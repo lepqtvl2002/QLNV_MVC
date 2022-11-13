@@ -94,7 +94,12 @@ class PhongBanModel {
 
         $sql = "INSERT INTO $dbname.phongban VALUES (NULL, '$tenpb', '$mota')";
         
-        $result = $conn->query($sql);
+        $result = false;
+        try {
+            $result = $conn->query($sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
         
         // Close connect      
         $conn->close();
@@ -109,7 +114,12 @@ class PhongBanModel {
 
         $sql = "UPDATE $dbname.phongban SET mota='$mota',tenpb='$tenpb' WHERE idpb = '$idpb'";
         
-        $result = $conn->query($sql);
+        $result = false;
+        try {
+            $result = $conn->query($sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
         
         // Close connect      
         $conn->close();
@@ -121,7 +131,12 @@ class PhongBanModel {
 
         $sql = "DELETE FROM $dbname.phongban WHERE idpb='$idpb'";
         
-        $result = $conn->query($sql);
+        $result = false;
+        try {
+            $result = $conn->query($sql);
+        } catch (Exception $e) {
+            echo $e;
+        }
         
         // Close connect      
         $conn->close();
