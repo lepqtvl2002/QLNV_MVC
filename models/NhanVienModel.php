@@ -1,148 +1,91 @@
 <?php
+require_once 'Model.php';
+class NhanVienModel extends Model
+{
 
-class NhanVienModel {
-
-    function __construct() {
+    function __construct()
+    {
     }
 
-    public function getList($args = []) {
-        require('connect.php');
-        
+    public function getList($args = [])
+    {
         $information = $args['information'];
         $selection = $args['selection'];
         if ($selection == "") $selection = "tennv";
 
-        $sql = "SELECT * FROM $dbname.nhanvien 
-        INNER JOIN $dbname.phongban ON $dbname.nhanvien.idpb=$dbname.phongban.idpb";
+        $sql = "SELECT idnv, tennv, tenpb, diachi FROM DU_LIEU.nhanvien 
+        INNER JOIN DU_LIEU.phongban ON DU_LIEU.nhanvien.idpb=DU_LIEU.phongban.idpb";
 
         if ($information || $information == 0) $sql .= " WHERE $selection LIKE '%$information%'";
         
-        $arr = array();
-        
-        try {
-            $result = $conn->query($sql);
-            
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()) {
-                    $element = array();
-                    $element['idnv'] = $row['idnv'];
-                    $element['tennv'] = $row['tennv'];
-                    $element['tenpb'] = $row['tenpb'];
-                    $element['diachi'] = $row['diachi'];
-                    
-                    $arr[] = $element;
-                }
-            } else {
-                echo "0 results";
-            }
-        } catch (Exception $e) {
-            echo "$sql; ";
-            echo $e;
-        }
-        
-        // Close connect      
-        $conn->close();
-        
+        $arr = $this->ExecuteReader($sql);
+
         return $arr;
     }
-    
-    public function getDetail($idnv = 1) {
-        require('connect.php');
-        $sql = "SELECT * FROM $dbname.nhanvien
-        INNER JOIN $dbname.phongban ON $dbname.nhanvien.idpb=$dbname.phongban.idpb
+
+    public function getDetail($idnv = 1)
+    {
+        $sql = "SELECT * FROM DU_LIEU.nhanvien
+        INNER JOIN DU_LIEU.phongban ON DU_LIEU.nhanvien.idpb=DU_LIEU.phongban.idpb
         WHERE idnv=$idnv";
 
-        $result = $conn->query($sql);
-        $record = $result->fetch_assoc();
-        
-        // Close connect      
-        $conn->close();
+        $record = $this->ExecuteScalar($sql);
 
         return $record;
     }
 
-    public function create($args) {
-        require('connect.php');
-
-        $tennv=$args['tennv'];
-        $idpb=$args['idpb'];
-        $diachi=$args['diachi'];
-
-        $sql = "INSERT INTO $dbname.nhanvien VALUES (NULL ,'$tennv', '$idpb', '$diachi')";
-
-        $result = false;
-        try {
-            $result = $conn->query($sql);
-        } catch (Exception $e) {
-            echo $e;
-        }
+    public function create($args)
+    {
         
-        // Close connect      
-        $conn->close();
+        $tennv = $args['tennv'];
+        $idpb = $args['idpb'];
+        $diachi = $args['diachi'];
+        
+        $sql = "INSERT INTO DU_LIEU.nhanvien VALUES (NULL ,'$tennv', '$idpb', '$diachi')";
 
+        $result = $this->ExecuteNonQuery($sql);
         return $result;
     }
 
-    public function edit($args) {
-        require('connect.php');
-
-        $idnv=$args['idnv'];
-        $tennv=$args['tennv'];
-        $idpb=$args['idpb'];
-        $diachi=$args['diachi'];
-
-        $sql = "UPDATE $dbname.nhanvien SET tennv='$tennv', idpb='$idpb', diachi='$diachi' WHERE idnv=$idnv";
-
-        $result = false;
-        try {
-            $result = $conn->query($sql);
-        } catch (Exception $e) {
-            echo $e;
-        }
+    public function edit($args)
+    {
         
-        // Close connect      
-        $conn->close();
+        $idnv = $args['idnv'];
+        $tennv = $args['tennv'];
+        $idpb = $args['idpb'];
+        $diachi = $args['diachi'];
+        
+        $sql = "UPDATE DU_LIEU.nhanvien SET tennv='$tennv', idpb='$idpb', diachi='$diachi' WHERE idnv=$idnv";
+        
+        $result = $this->ExecuteNonQuery($sql);
         return $result;
     }
 
-    public function delete($idnv) {
-        require('connect.php');
+    public function delete($idnv)
+    {
+        $sql = "DELETE FROM DU_LIEU.nhanvien WHERE idnv='$idnv'";
 
-        $sql = "DELETE FROM $dbname.nhanvien WHERE idnv='$idnv'";
-
-        $result = false;
-        try {
-            $result = $conn->query($sql);
-        } catch (Exception $e) {
-            echo $e;
-        }
-        
-        // Close connect      
-        $conn->close();
+        $result = $this->ExecuteNonQuery($sql);
         return $result;
     }
 
-    public function deleteAll($args) {
+    public function deleteAll($args)
+    {
         require('connect.php');
 
         $result = true;
 
         foreach ($args as $key => $value) {
-            $sql = "DELETE FROM $dbname.nhanvien WHERE idnv='$value'";
+            $sql = "DELETE FROM DU_LIEU.nhanvien WHERE idnv='$value'";
             if ($conn->query($sql) === false) {
                 $result = false;
                 break;
             }
         }
-        
+
         // Close connect      
         $conn->close();
 
         return $result;
     }
-    
-    
 }
-
-?>
